@@ -1,12 +1,4 @@
-"""
-dynamics.py
 
-Time-domain storage & retrieval simulation: a Gaussian probe pulse
-and a control field that switches off (storage) then back on
-(retrieval). Same physics as the original notebook's
-probe_coeff / control_coeff / mesolve cells, wrapped into a single
-reusable function: run_storage_retrieval().
-"""
 
 import numpy as np
 from qutip import mesolve
@@ -19,7 +11,7 @@ from .operators import (
 
 
 def probe_coeff(t, args):
-    """Gaussian probe pulse, centered at t0 with width sigma."""
+   
     Omega_p = args["Omega_p"]
     t0 = args.get("t0", 4)
     sigma = args.get("sigma", 2)
@@ -27,7 +19,7 @@ def probe_coeff(t, args):
 
 
 def control_coeff(t, args):
-    """Control field: on, then off during storage, then back on for retrieval."""
+   
     Omega0 = args["Omega0"]
     t_store = args.get("t_store", 4)
     t_retrieve = args.get("t_retrieve", 10)
@@ -39,7 +31,7 @@ def control_coeff(t, args):
 
 
 def build_hamiltonian(Delta=0.0):
-    """Hamiltonian in the rotating frame, with time-dependent probe/control terms."""
+   
     H0 = Delta * (e * e.dag())
     H = [
         H0,
@@ -64,20 +56,7 @@ def run_storage_retrieval(
     t_retrieve=10,
     tau=0.3,
 ):
-    """
-    Run the storage & retrieval simulation.
-
-    Same calculation as the original notebook (mesolve with the
-    probe/control pulse shapes), bundled into one function so it can
-    be reused by EITNode and called with different parameters.
-
-    Returns
-    -------
-    dict with keys:
-        "times", "rho12" (spin-wave coherence), "rho13" (optical
-        coherence), "excited" (excited state population), "result"
-        (raw qutip Result object)
-    """
+   
     c_ops = make_collapse_ops(gamma_31, gamma_32, gamma_12)
     H = build_hamiltonian(Delta=Delta)
 
@@ -117,7 +96,7 @@ def run_storage_retrieval(
 
 
 def plot_storage_retrieval(sim, show=True):
-    """Plot spin-wave coherence, optical coherence and excited population."""
+   
     import matplotlib.pyplot as plt
 
     times = sim["times"]
