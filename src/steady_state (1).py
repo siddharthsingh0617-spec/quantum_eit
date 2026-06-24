@@ -1,11 +1,4 @@
-"""
-steady_state.py
 
-Computes the steady-state EIT spectrum: absorption, susceptibility
-and refractive index as a function of probe detuning. This is the
-same calculation as in the original notebook's "time_evolution" cell
-(it loops over delta_p and solves for the steady state at each point).
-"""
 
 import numpy as np
 from qutip import steadystate
@@ -23,22 +16,7 @@ def compute_spectrum(
     gamma_32=par.gamma_32,
     gamma_12=par.gamma_12,
 ):
-    """
-    Sweep probe detuning and compute the steady-state EIT spectrum.
-
-    Parameters
-    ----------
-    delta_p : array_like
-        Probe detuning values to sweep over.
-    delta_c, omega_p, omega_c, gamma_31, gamma_32, gamma_12 : float
-        Physical parameters (defaults taken from parameters.py).
-
-    Returns
-    -------
-    dict with keys:
-        "delta_p", "absorption", "chi_real", "chi_imag",
-        "n_real", "n_imag"
-    """
+   
     c_ops = make_collapse_ops(gamma_31, gamma_32, gamma_12)
 
     absorption = []
@@ -79,7 +57,7 @@ def compute_spectrum(
 
 
 def plot_spectrum(spectrum, show=True):
-    """Plot absorption vs probe detuning (same plot as the original notebook)."""
+
     import matplotlib.pyplot as plt
 
     plt.plot(spectrum["delta_p"], spectrum["absorption"])
