@@ -1,17 +1,4 @@
-"""
-main.py
 
-Runs the same things the original notebook did, using the modular
-eit package:
-
-  1. Steady-state EIT spectrum (absorption vs probe detuning) + plot
-  2. Storage & retrieval dynamics (spin-wave, optical coherence,
-     excited population) + plot
-  3. Builds an EITNode, stores a pulse in it, and prints the resulting
-     memory state
-
-Run with:  python main.py
-"""
 
 from eit import (
     EITNode,
@@ -23,7 +10,7 @@ from eit import (
 
 
 def main():
-    # ---- 1. steady-state EIT spectrum ----
+    
     print("Computing steady-state EIT spectrum...")
     spectrum = compute_spectrum()
     plot_spectrum(spectrum, show=False)
@@ -38,12 +25,12 @@ def main():
             spectrum["absorption"][i],
         )
 
-    # ---- 2. storage & retrieval dynamics ----
+ 
     print("\nRunning storage & retrieval simulation...")
     sim = run_storage_retrieval(Omega_p=0.02, Omega0=5)
     plot_storage_retrieval(sim, show=False)
 
-    # ---- 3. EITNode usage ----
+   
     print("\nCreating an EITNode and storing a pulse...")
     node = EITNode("node_1", Omega_p=0.05, Omega0=5.0, gamma_12=0.01)
     node.store()
